@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - default_schema@localhost" uuid="fda5ea70-6302-4a65-bc8c-1f93820968fc">
+    <database-info product="MySQL" version="5.5.23" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="default_schema"/>
+    <table name="applications" schema="" catalog="default_schema" type="TABLE">
+      <column name="aplication_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="filing_time" sqlType="TIME" precision="8" scale="0" nullable="false" jdbcType="92"/>
+      <column name="message" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="status" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Contests_contest_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="users_idUser" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="aplication_id"/>
+      <foreign-key name="fk_Applications_Contests1" columns="Contests_contest_id" ref-table="contests" ref-schema="" ref-catalog="default_schema" ref-columns="contest_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_applications_users1" columns="users_idUser" ref-table="users" ref-schema="" ref-catalog="default_schema" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Applications_Contests1_idx" unique="false" columns="Contests_contest_id"/>
+      <index name="fk_applications_users1_idx" unique="false" columns="users_idUser"/>
+    </table>
+    <table name="complaints" schema="" catalog="default_schema" type="TABLE">
+      <column name="complaint_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="owner" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="filing_time" sqlType="TIME" precision="8" scale="0" nullable="false" jdbcType="92"/>
+      <column name="message" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Tasks_task_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="complaint_id"/>
+      <foreign-key name="fk_Complaints_Tasks1" columns="Tasks_task_id" ref-table="tasks" ref-schema="" ref-catalog="default_schema" ref-columns="task_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Complaints_Tasks1_idx" unique="false" columns="Tasks_task_id"/>
+    </table>
+    <table name="contest_languages" schema="" catalog="default_schema" type="TABLE">
+      <column name="Languages_language_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Contests_contest_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="Contests_contest_id,Languages_language_id"/>
+      <foreign-key name="fk_Contest_Languages_Contests1" columns="Contests_contest_id" ref-table="contests" ref-schema="" ref-catalog="default_schema" ref-columns="contest_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Contest_Languages_Languages1" columns="Languages_language_id" ref-table="languages" ref-schema="" ref-catalog="default_schema" ref-columns="language_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Contest_Languages_Contests1_idx" unique="false" columns="Contests_contest_id"/>
+      <index name="fk_Contest_Languages_Languages1_idx" unique="false" columns="Languages_language_id"/>
+    </table>
+    <table name="contest_tasks" schema="" catalog="default_schema" type="TABLE">
+      <column name="contest_task_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="task_order" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="task_mark" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="task_cost" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Tasks_task_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Contests_contest_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="contest_task_id"/>
+      <foreign-key name="fk_Contest_Tasks_Contests1" columns="Contests_contest_id" ref-table="contests" ref-schema="" ref-catalog="default_schema" ref-columns="contest_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Contest_Tasks_Tasks" columns="Tasks_task_id" ref-table="tasks" ref-schema="" ref-catalog="default_schema" ref-columns="task_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Contest_Tasks_Contests1_idx" unique="false" columns="Contests_contest_id"/>
+      <index name="fk_Contest_Tasks_Tasks_idx" unique="false" columns="Tasks_task_id"/>
+    </table>
+    <table name="contests" schema="" catalog="default_schema" type="TABLE">
+      <column name="contest_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="caption" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="con_type" sqlType="VARCHAR" precision="254" scale="0" nullable="false" jdbcType="12"/>
+      <column name="start_time" sqlType="TIME" precision="8" scale="0" nullable="false" jdbcType="92"/>
+      <column name="duration" sqlType="TIME" precision="8" scale="0" nullable="false" jdbcType="92"/>
+      <column name="freeze_time" sqlType="TIME" precision="8" scale="0" nullable="true" jdbcType="92"/>
+      <column name="is_open" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="rules" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="users_idUser" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="contest_id"/>
+      <foreign-key name="fk_contests_users1" columns="users_idUser" ref-table="users" ref-schema="" ref-catalog="default_schema" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_Applications_Contests1" table="applications" schema="" catalog="default_schema" columns="Contests_contest_id"/>
+      <exported-key name="fk_Contest_Languages_Contests1" table="contest_languages" schema="" catalog="default_schema" columns="Contests_contest_id"/>
+      <exported-key name="fk_Contest_Tasks_Contests1" table="contest_tasks" schema="" catalog="default_schema" columns="Contests_contest_id"/>
+      <exported-key name="fk_Roles_Contests1" table="roles" schema="" catalog="default_schema" columns="Contests_contest_id"/>
+      <exported-key name="fk_Solutions_Contests1" table="solutions" schema="" catalog="default_schema" columns="Contests_contest_id"/>
+      <index name="fk_contests_users1_idx" unique="false" columns="users_idUser"/>
+    </table>
+    <table name="languages" schema="" catalog="default_schema" type="TABLE">
+      <column name="language_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="title" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="description" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="file_extension" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="compilation_cmd" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="execution_cmd" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="language_id"/>
+      <exported-key name="fk_Contest_Languages_Languages1" table="contest_languages" schema="" catalog="default_schema" columns="Languages_language_id"/>
+      <exported-key name="fk_Solutions_Languages1" table="solutions" schema="" catalog="default_schema" columns="Languages_language_id"/>
+    </table>
+    <table name="params" schema="" catalog="default_schema" type="TABLE">
+      <column name="params_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="pname" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="pvalue" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="params_id"/>
+    </table>
+    <table name="roles" schema="" catalog="default_schema" type="TABLE">
+      <column name="contest_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="username" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="role_type" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Contests_contest_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="contest_id,username,role_type"/>
+      <foreign-key name="fk_Roles_Contests1" columns="Contests_contest_id" ref-table="contests" ref-schema="" ref-catalog="default_schema" ref-columns="contest_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Roles_Contests1_idx" unique="false" columns="Contests_contest_id"/>
+    </table>
+    <table name="runs" schema="" catalog="default_schema" type="TABLE">
+      <column name="idRuns" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="run_number" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="result_type" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="memory" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="cpu_time" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="real_time" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Tests_test_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Solutions_solution_id" sqlType="MEDIUMINT" precision="7" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idRuns"/>
+      <foreign-key name="fk_Runs_Solutions1" columns="Solutions_solution_id" ref-table="solutions" ref-schema="" ref-catalog="default_schema" ref-columns="solution_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Runs_Tests1" columns="Tests_test_id" ref-table="tests" ref-schema="" ref-catalog="default_schema" ref-columns="test_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_Runs_Solutions1_idx" unique="false" columns="Solutions_solution_id"/>
+      <index name="fk_Runs_Tests1_idx" unique="false" columns="Tests_test_id"/>
+    </table>
+    <table name="solutions" schema="" catalog="default_schema" type="TABLE">
+      <column name="solution_id" sqlType="MEDIUMINT" precision="7" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="sabmit_time" sqlType="TIME" precision="8" scale="0" nullable="false" jdbcType="92"/>
+      <column name="username" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="language_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="source_code" sqlType="MEDIUMTEXT" precision="16777215" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="status" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="status_message" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="compilation_time" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="Tasks_task_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Contests_contest_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Languages_language_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="users_idUser" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="solution_id"/>
+      <foreign-key name="fk_Solutions_Contests1" columns="Contests_contest_id" ref-table="contests" ref-schema="" ref-catalog="default_schema" ref-columns="contest_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Solutions_Languages1" columns="Languages_language_id" ref-table="languages" ref-schema="" ref-catalog="default_schema" ref-columns="language_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_Solutions_Tasks1" columns="Tasks_task_id" ref-table="tasks" ref-schema="" ref-catalog="default_schema" ref-columns="task_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_solutions_users1" columns="users_idUser" ref-table="users" ref-schema="" ref-catalog="default_schema" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_Runs_Solutions1" table="runs" schema="" catalog="default_schema" columns="Solutions_solution_id"/>
+      <index name="fk_Solutions_Contests1_idx" unique="false" columns="Contests_contest_id"/>
+      <index name="fk_Solutions_Languages1_idx" unique="false" columns="Languages_language_id"/>
+      <index name="fk_Solutions_Tasks1_idx" unique="false" columns="Tasks_task_id"/>
+      <index name="fk_solutions_users1_idx" unique="false" columns="users_idUser"/>
+    </table>
+    <table name="tasks" schema="" catalog="default_schema" type="TABLE">
+      <column name="task_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="owner" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="title" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="is_hidden" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="descriprion" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="create_time" sqlType="TIME" precision="8" scale="0" nullable="false" jdbcType="92"/>
+      <column name="memory_limit" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="cpu_time_limit" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="real_time_limit" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="output_limit" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="is_healthy" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="author" sqlType="VARCHAR" precision="250" scale="0" nullable="true" jdbcType="12"/>
+      <column name="users_idUser" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="task_id"/>
+      <foreign-key name="fk_tasks_users1" columns="users_idUser" ref-table="users" ref-schema="" ref-catalog="default_schema" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_Complaints_Tasks1" table="complaints" schema="" catalog="default_schema" columns="Tasks_task_id"/>
+      <exported-key name="fk_Contest_Tasks_Tasks" table="contest_tasks" schema="" catalog="default_schema" columns="Tasks_task_id"/>
+      <exported-key name="fk_Solutions_Tasks1" table="solutions" schema="" catalog="default_schema" columns="Tasks_task_id"/>
+      <exported-key name="fk_Tests_Tasks1" table="tests" schema="" catalog="default_schema" columns="Tasks_task_id"/>
+      <index name="fk_tasks_users1_idx" unique="false" columns="users_idUser"/>
+    </table>
+    <table name="tests" schema="" catalog="default_schema" type="TABLE">
+      <column name="test_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="test_number" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="input_data" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="output_data" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="Tasks_task_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="test_id"/>
+      <foreign-key name="fk_Tests_Tasks1" columns="Tasks_task_id" ref-table="tasks" ref-schema="" ref-catalog="default_schema" ref-columns="task_id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_Runs_Tests1" table="runs" schema="" catalog="default_schema" columns="Tests_test_id"/>
+      <index name="fk_Tests_Tasks1_idx" unique="false" columns="Tasks_task_id"/>
+    </table>
+    <table name="users" schema="" catalog="default_schema" type="TABLE">
+      <column name="idUser" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="login" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="real_name" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="organization" sqlType="VARCHAR" precision="250" scale="0" nullable="false" jdbcType="12"/>
+      <column name="register_date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="age" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="is_admin" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="can_create_contest" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <column name="can_create_task" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <primary-key name="PRIMARY" columns="idUser"/>
+      <exported-key name="fk_applications_users1" table="applications" schema="" catalog="default_schema" columns="users_idUser"/>
+      <exported-key name="fk_contests_users1" table="contests" schema="" catalog="default_schema" columns="users_idUser"/>
+      <exported-key name="fk_solutions_users1" table="solutions" schema="" catalog="default_schema" columns="users_idUser"/>
+      <exported-key name="fk_tasks_users1" table="tasks" schema="" catalog="default_schema" columns="users_idUser"/>
+    </table>
+  </data-source>
+</component>
